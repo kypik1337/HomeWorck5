@@ -10,7 +10,6 @@ def printSetka (set):
     print('---------')
     print(f'{setka[6]} | {setka[7]} | {setka[8]}')
 
-print(printSetka(setka))
 
 def take_input (player_token):    #оргумент функции
     valid = False
@@ -31,6 +30,34 @@ def take_input (player_token):    #оргумент функции
         else:
             print('введите число от 1 до 9')
 
+def check_win(setka):
+    win_coord = ((0,1,2),(3,4,5),(6,7,8),(0,3,6),(1,4,7),(2,5,8),(0,4,8),(2,4,6))
+    for each in win_coord:
+        if setka[each[0]] == setka[each[1]] == setka[each[2]]:
+            return setka[each[0]]
+    return False
+
+def main(setka):
+    counter = 0
+    win = False
+    while not win:
+        printSetka(setka)
+        if counter % 2 == 0:
+            take_input("X")
+        else:
+            take_input("O")
+        counter += 1
+        if counter > 4:
+            tmp = check_win(setka)
+            if tmp:
+                print (tmp, "выиграл!")
+                win = True
+                break
+        if counter == 9:
+            print ("Ничья!")
+            break
+    printSetka(setka)        
+main(setka)
 
 
 
@@ -39,6 +66,7 @@ def take_input (player_token):    #оргумент функции
 
 
 
+#                                                        этот код я пытался апнуть но тот что выше по моему проще 
 # while True:
 #     per1 = int(input('Введи позицию для крестика X:= ') )
 #     setka[per1-1] = 'X'
